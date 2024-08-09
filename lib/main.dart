@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:foodie/categories/categories.dart';
+import 'package:foodie/screens/categories.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 final theme = ThemeData(
