@@ -25,7 +25,7 @@ class CategoriesGridItems extends StatelessWidget {
               category.color.withOpacity(0.5),
               category.color.withOpacity(0.90),
             ],
-            tileMode: TileMode.mirror,
+            // tileMode: TileMode.mirror,
           ),
         ),
         child: Text(
