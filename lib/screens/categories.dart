@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:foodie/data/dummy_data.dart';
+import 'package:foodie/widgets/categories_grid_items.dart';
 
 class CategoriesScreen extends StatelessWidget {
   const CategoriesScreen({super.key});
@@ -10,6 +12,7 @@ class CategoriesScreen extends StatelessWidget {
         title: const Text('Choose category'),
       ),
       body: GridView(
+        padding: const EdgeInsets.all(24),
         // The grid delegate defines how the grid items should be arranged.
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           // Number of columns in the grid.
@@ -26,14 +29,10 @@ class CategoriesScreen extends StatelessWidget {
         ),
 
         // The children of the GridView, which will be laid out according to the grid delegate.
-        children: const [
+        children: [
           // Each Text widget represents an item in the grid.
-          Text('data'),
-          Text('data1'),
-          Text('data2'),
-          Text('data3'),
-          Text('data4'),
-          Text('data5'),
+          for (final category in availableCategories)
+            CategoriesGridItems(category: category),
         ],
       ),
     );

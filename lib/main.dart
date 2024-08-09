@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 final theme = ThemeData(
   colorScheme: ColorScheme.fromSeed(
     brightness: Brightness.dark,
-    seedColor: const Color.fromARGB(255, 18, 15, 59),
+    seedColor: const Color.fromARGB(255, 56, 30, 183),
   ),
   textTheme: GoogleFonts.ubuntuTextTheme(),
 );
