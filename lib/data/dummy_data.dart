@@ -411,7 +411,7 @@ const dummyMeals = [
     categories: [
       'c2',
       'c5',
-      'c10',
+      'c7',
     ],
     title: 'Carrot banana cookies 🍪',
     affordability: Affordability.affordable,

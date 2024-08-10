@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodie/data/dummy_data.dart';
+import 'package:foodie/models/category.dart';
 import 'package:foodie/screens/meals.dart';
 import 'package:foodie/widgets/categories_grid_items.dart';
 
@@ -7,13 +8,19 @@ class CategoriesScreen extends StatelessWidget {
   const CategoriesScreen({super.key});
 
   // using Navigator to allow switching btwn screens
-  void _selectScreen(BuildContext context) {
+  void _selectScreen(BuildContext context, Category category) {
+    final sortedMeals = dummyMeals
+        .where(
+          (meal) => meal.categories.contains(category.id),
+        )
+        .toList();
+
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (ctx) => const MealsScreen(
-          title: 'meal',
-          meals: [],
+        builder: (ctx) => MealsScreen(
+          title: category.title,
+          meals: sortedMeals,
         ),
       ),
     );
@@ -49,7 +56,7 @@ class CategoriesScreen extends StatelessWidget {
             CategoriesGridItems(
               category: category,
               onSelectCategory: () {
-                _selectScreen(context);
+                _selectScreen(context, category);
               },
             ),
         ],
