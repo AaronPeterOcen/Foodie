@@ -7,9 +7,13 @@ class MealItem extends StatelessWidget {
   const MealItem({
     super.key,
     required this.meal,
+    required this.onMealsDetails,
   });
 
   final Meal meal;
+
+  // new function that will receive its data from the meals file
+  final void Function(Meal meal) onMealsDetails;
 
   // Getter that will turn the first letter to a uppercase character
   String get complexityText {
@@ -32,7 +36,10 @@ class MealItem extends StatelessWidget {
       clipBehavior: Clip.hardEdge,
       elevation: 5,
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          // onMealsDetails is called in the anonymous function where it will be executed
+          onMealsDetails(meal);
+        },
         // Stack positions multiple widgets above each other
         child: Stack(
           children: [
