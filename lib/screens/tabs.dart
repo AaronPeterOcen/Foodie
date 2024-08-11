@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:foodie/screens/categories.dart';
+import 'package:foodie/screens/meals.dart';
 
 class TabScreen extends StatefulWidget {
   const TabScreen({super.key});
@@ -8,15 +10,33 @@ class TabScreen extends StatefulWidget {
 }
 
 class _TabScreenState extends State<TabScreen> {
+  int _selectedPage = 0;
+
+  void _selectPage(int index) {
+    setState(() {
+      _selectedPage = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    Widget activePage = const CategoriesScreen();
+    var activePageTitle = 'Categories';
+
+    if (_selectedPage == 1) {
+      activePage = const MealsScreen(meals: []);
+      activePageTitle = 'Your Favorites';
+    }
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('current screen'),
+        title: Text(activePageTitle),
       ),
-      // body: ...,
+      body: activePage,
       bottomNavigationBar: BottomNavigationBar(
-        onTap: (index) {},
+        onTap: _selectPage,
+        currentIndex: _selectedPage,
+        // selectedItemColor: Theme.of(context).highlightColor.withBlue(255),
         // The items property defines the list of tabs in the BottomNavigationBar.
         items: const [
           // The first BottomNavigationBarItem represents the 'Categories' tab.
