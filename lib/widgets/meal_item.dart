@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodie/models/meal.dart';
+import 'package:foodie/widgets/meal_item_trait.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class MealItem extends StatelessWidget {
@@ -9,6 +10,17 @@ class MealItem extends StatelessWidget {
   });
 
   final Meal meal;
+
+  // Getter that will turn the first letter to a uppercase character
+  String get complexityText {
+    return meal.complexity.name[0].toUpperCase() +
+        meal.complexity.name.substring(1);
+  }
+
+  String get affordabilityText {
+    return meal.affordability.name[0].toUpperCase() +
+        meal.affordability.name.substring(1);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +67,23 @@ class MealItem extends StatelessWidget {
                     ),
                     const SizedBox(height: 10),
                     Row(
-                      children: [],
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        MealItemTrait(
+                          icon: Icons.timelapse_outlined,
+                          label: '${meal.duration} mins',
+                        ),
+                        const SizedBox(width: 10),
+                        MealItemTrait(
+                          icon: Icons.work_outline_sharp,
+                          label: complexityText,
+                        ),
+                        const SizedBox(width: 10),
+                        MealItemTrait(
+                          icon: Icons.money,
+                          label: affordabilityText,
+                        ),
+                      ],
                     )
                   ],
                 ),
