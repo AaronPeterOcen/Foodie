@@ -15,6 +15,11 @@ class MealDetails extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(meal.title),
+        // adding the action widget to handle adding favorite meal items
+        actions: [
+          IconButton(
+              onPressed: () {}, icon: const Icon(Icons.star_border_outlined))
+        ],
       ),
       body: SingleChildScrollView(
         //for scrollability and fit items
