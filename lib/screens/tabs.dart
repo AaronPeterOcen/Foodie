@@ -53,7 +53,7 @@ class _TabScreenState extends State<TabScreen> {
 
   // will handle Drawer functionality to change screen with onScreenSelect
   void _screenSelect(String identifier) {
-    if (identifier == 'filter') {
+    if (identifier == 'filters') {
     } else {
       Navigator.of(context).pop();
     }

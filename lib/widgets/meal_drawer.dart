@@ -70,7 +70,7 @@ class MealDrawer extends StatelessWidget {
               color: Theme.of(context).colorScheme.onTertiaryContainer,
             ),
             title: Text(
-              'Settings',
+              'Filters',
               style: Theme.of(context).textTheme.titleMedium!.copyWith(
                     color: Theme.of(context).colorScheme.onTertiaryContainer,
                   ),
