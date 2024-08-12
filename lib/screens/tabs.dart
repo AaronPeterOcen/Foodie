@@ -16,15 +16,31 @@ class _TabScreenState extends State<TabScreen> {
   // initialize a final variable that will hold an empty list value
   final List<Meal> _favoriteMeal = [];
 
+  void _showInfoMessage(String message) {
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+      ),
+    );
+  }
+
   // function will handle addition of the selected meal to the list
   // based on whether the item is already in the list or not
   void _toggleSelectedMeal(Meal meal) {
     final isExisting = _favoriteMeal.contains(meal);
 
     if (isExisting) {
-      _favoriteMeal.remove(meal);
+      // using setState to update the ui when the meal is selected or deselected
+      setState(() {
+        _favoriteMeal.remove(meal);
+      });
+      _showInfoMessage('Meal removed from favorites');
     } else {
-      _favoriteMeal.add(meal);
+      setState(() {
+        _favoriteMeal.add(meal);
+      });
+      _showInfoMessage('Meal added to favorites');
     }
   }
 
@@ -43,7 +59,8 @@ class _TabScreenState extends State<TabScreen> {
 
     if (_selectedPage == 1) {
       activePage = MealsScreen(
-        meals: [],
+        meals:
+            _favoriteMeal, //allowing the favorited meal to be seen on the favorites page
         onToggleFavorite: _toggleSelectedMeal,
       );
       activePageTitle = 'Your Favorites';
