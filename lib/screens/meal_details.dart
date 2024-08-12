@@ -6,9 +6,11 @@ class MealDetails extends StatelessWidget {
   const MealDetails({
     super.key,
     required this.meal,
+    required this.onToggleFavorite,
   });
 
   final Meal meal;
+  final void Function(Meal meal) onToggleFavorite;
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +18,14 @@ class MealDetails extends StatelessWidget {
       appBar: AppBar(
         title: Text(meal.title),
         // adding the action widget to handle adding favorite meal items
+        // the function will be got from the tabs screen
         actions: [
           IconButton(
-              onPressed: () {}, icon: const Icon(Icons.star_border_outlined))
+            onPressed: () {
+              onToggleFavorite(meal);
+            },
+            icon: const Icon(Icons.star_border_outlined),
+          )
         ],
       ),
       body: SingleChildScrollView(

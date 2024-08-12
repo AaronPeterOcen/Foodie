@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:foodie/data/dummy_data.dart';
 import 'package:foodie/models/category.dart';
+import 'package:foodie/models/meal.dart';
 import 'package:foodie/screens/meals.dart';
 import 'package:foodie/widgets/categories_grid_items.dart';
 
 class CategoriesScreen extends StatelessWidget {
-  const CategoriesScreen({super.key});
+  const CategoriesScreen({
+    super.key,
+    required this.onToggleFavorite,
+  });
+
+  final void Function(Meal meal) onToggleFavorite;
 
   // using Navigator to allow switching btwn screens
   void _selectScreen(BuildContext context, Category category) {
@@ -21,6 +27,7 @@ class CategoriesScreen extends StatelessWidget {
         builder: (ctx) => MealsScreen(
           title: category.title,
           meals: sortedMeals,
+          onToggleFavorite: onToggleFavorite,
         ),
       ),
     );
