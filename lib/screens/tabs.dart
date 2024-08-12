@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodie/models/meal.dart';
 import 'package:foodie/screens/categories.dart';
+import 'package:foodie/screens/filters.dart';
 import 'package:foodie/screens/meals.dart';
 import 'package:foodie/widgets/meal_drawer.dart';
 
@@ -53,9 +54,13 @@ class _TabScreenState extends State<TabScreen> {
 
   // will handle Drawer functionality to change screen with onScreenSelect
   void _screenSelect(String identifier) {
+    Navigator.of(context).pop();
     if (identifier == 'filters') {
-    } else {
-      Navigator.of(context).pop();
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (ctx) => const FiltersScreen(),
+        ),
+      );
     }
   }
 
