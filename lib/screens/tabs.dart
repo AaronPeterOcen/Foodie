@@ -51,6 +51,14 @@ class _TabScreenState extends State<TabScreen> {
     });
   }
 
+  // will handle Drawer functionality to change screen with onScreenSelect
+  void _screenSelect(String identifier) {
+    if (identifier == 'filter') {
+    } else {
+      Navigator.of(context).pop();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     Widget activePage = CategoriesScreen(
@@ -71,7 +79,9 @@ class _TabScreenState extends State<TabScreen> {
       appBar: AppBar(
         title: Text(activePageTitle),
       ),
-      drawer: MealDrawer(), //
+      drawer: MealDrawer(
+        onScreenSelect: _screenSelect,
+      ), //
       body: activePage,
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectPage,

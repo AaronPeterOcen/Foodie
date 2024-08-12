@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:foodie/main.dart';
+// import 'package:foodie/main.dart';
 
 class MealDrawer extends StatelessWidget {
-  const MealDrawer({super.key});
+  const MealDrawer({super.key, required this.onScreenSelect});
+
+  final void Function(String identifier)
+      onScreenSelect; // will be used to handle screen change when drawer item is touched
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +59,9 @@ class MealDrawer extends StatelessWidget {
                     color: Theme.of(context).colorScheme.onTertiaryContainer,
                   ),
             ),
-            onTap: () {},
+            onTap: () {
+              onScreenSelect('meals');
+            },
           ),
           ListTile(
             leading: Icon(
@@ -70,7 +75,9 @@ class MealDrawer extends StatelessWidget {
                     color: Theme.of(context).colorScheme.onTertiaryContainer,
                   ),
             ),
-            onTap: () {},
+            onTap: () {
+              onScreenSelect('filters');
+            },
           )
         ],
       ),
