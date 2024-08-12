@@ -42,6 +42,35 @@ class MealDrawer extends StatelessWidget {
                 ),
               ],
             ),
+          ),
+          // Adding drawer items
+          ListTile(
+            leading: Icon(
+              Icons.restaurant_rounded,
+              size: 26,
+              color: Theme.of(context).colorScheme.onTertiaryContainer,
+            ),
+            title: Text(
+              'Meals',
+              style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                    color: Theme.of(context).colorScheme.onTertiaryContainer,
+                  ),
+            ),
+            onTap: () {},
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.settings_applications_outlined,
+              size: 26,
+              color: Theme.of(context).colorScheme.onTertiaryContainer,
+            ),
+            title: Text(
+              'Settings',
+              style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                    color: Theme.of(context).colorScheme.onTertiaryContainer,
+                  ),
+            ),
+            onTap: () {},
           )
         ],
       ),
