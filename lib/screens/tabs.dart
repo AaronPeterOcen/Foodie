@@ -53,14 +53,17 @@ class _TabScreenState extends State<TabScreen> {
   }
 
   // will handle Drawer functionality to change screen with onScreenSelect
-  void _screenSelect(String identifier) {
+  void _screenSelect(String identifier) async {
     Navigator.of(context).pop();
     if (identifier == 'filters') {
-      Navigator.of(context).push(
+      final result = Navigator.of(context).push<Map<Filter, bool>>(
         MaterialPageRoute(
           builder: (ctx) => const FiltersScreen(),
         ),
       );
+
+      // ignore: avoid_print
+      print(result);
     }
   }
 

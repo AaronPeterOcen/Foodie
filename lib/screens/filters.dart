@@ -39,7 +39,8 @@ class _FiltersScreenState extends State<FiltersScreen> {
       body: PopScope(
         //using PopScope to filter the items that will be selected by the filter choice
         canPop: false,
-        onPopInvokedWithResult: (didPop, result) {
+        // ignore: deprecated_member_use
+        onPopInvoked: (bool didPop) {
           if (didPop) return;
           Navigator.of(context).pop({
             Filter.glutenFree: _isGlutenFree,
