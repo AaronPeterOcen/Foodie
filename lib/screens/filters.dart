@@ -8,7 +8,12 @@ enum Filter {
 }
 
 class FiltersScreen extends StatefulWidget {
-  const FiltersScreen({super.key});
+  const FiltersScreen({
+    super.key,
+    required this.currentFilter,
+  });
+
+  final Map<Filter, bool> currentFilter;
 
   @override
   State<FiltersScreen> createState() => _FiltersScreenState();
@@ -19,6 +24,17 @@ class _FiltersScreenState extends State<FiltersScreen> {
   var _isLactoseFree = false;
   var _isVegetarian = false;
   var _isVegan = false;
+
+  @override
+  void initState() {
+    // changing the value of the selected filter item when the filter screen is selected to
+    // show currently selected filter
+    super.initState();
+    _isGlutenFree = widget.currentFilter[Filter.glutenFree]!;
+    _isLactoseFree = widget.currentFilter[Filter.lactoseFree]!;
+    _isVegan = widget.currentFilter[Filter.vegan]!;
+    _isVegetarian = widget.currentFilter[Filter.vegetarian]!;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,11 +52,20 @@ class _FiltersScreenState extends State<FiltersScreen> {
       //     }
       //   },
       // ),
+      // ignore: deprecated_member_use
       body: PopScope(
+        // onWillPop: () async {
+        //   Navigator.of(context).pop({
+        //     Filter.glutenFree: _isGlutenFree,
+        //     Filter.lactoseFree: _isGlutenFree,
+        //     Filter.vegan: _isVegan,
+        //     Filter.vegetarian: _isVegetarian,
+        //   });
+        //   return false;
         //using PopScope to filter the items that will be selected by the filter choice
         canPop: false,
         // ignore: deprecated_member_use
-        onPopInvoked: (bool didPop) {
+        onPopInvokedWithResult: (bool didPop, result) {
           if (didPop) return;
           Navigator.of(context).pop({
             Filter.glutenFree: _isGlutenFree,

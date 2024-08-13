@@ -9,13 +9,15 @@ class CategoriesScreen extends StatelessWidget {
   const CategoriesScreen({
     super.key,
     required this.onToggleFavorite,
+    required this.availableMeal,
   });
 
   final void Function(Meal meal) onToggleFavorite;
+  final List<Meal> availableMeal;
 
   // using Navigator to allow switching btwn screens
   void _selectScreen(BuildContext context, Category category) {
-    final sortedMeals = dummyMeals
+    final sortedMeals = availableMeal
         .where(
           (meal) => meal.categories.contains(category.id),
         )
