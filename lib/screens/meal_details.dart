@@ -53,8 +53,7 @@ class MealDetails extends StatelessWidget {
               Text(
                 ingredients,
                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color:
-                          Theme.of(context).colorScheme.onTertiaryFixedVariant,
+                      color: Theme.of(context).colorScheme.secondary,
                     ),
               ),
             const SizedBox(height: 24),
@@ -75,9 +74,7 @@ class MealDetails extends StatelessWidget {
                   textAlign: TextAlign.center,
                   '> $steps',
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        color: Theme.of(context)
-                            .colorScheme
-                            .onTertiaryFixedVariant,
+                        color: Theme.of(context).colorScheme.secondary,
                         fontWeight: FontWeight.normal,
                       ),
                 ),
