@@ -6,11 +6,11 @@ class MealDetails extends StatelessWidget {
   const MealDetails({
     super.key,
     required this.meal,
-    required this.onToggleFavorite,
+    // required this.onToggleFavorite,
   });
 
   final Meal meal;
-  final void Function(Meal meal) onToggleFavorite;
+  // final void Function(Meal meal) onToggleFavorite;
 
   @override
   Widget build(BuildContext context) {

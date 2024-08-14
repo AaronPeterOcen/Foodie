@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 // import 'package:foodie/data/dummy_data.dart';
 import 'package:foodie/models/meal.dart';
+import 'package:foodie/providers/favorites_provider.dart';
 import 'package:foodie/providers/meals_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:foodie/screens/categories.dart';
@@ -27,7 +28,7 @@ class _TabScreenState extends ConsumerState<TabScreen> {
   int _selectedPage = 0;
 
   // initialize a final variable that will hold an empty list value
-  final List<Meal> _favoriteMeal = [];
+  // final List<Meal> _favoriteMeal = [];
   // ignore: unused_field
   Map<Filter, bool> _selectedFilters = kInitialFilters;
 
@@ -42,22 +43,22 @@ class _TabScreenState extends ConsumerState<TabScreen> {
 
   // function will handle addition of the selected meal to the list
   // based on whether the item is already in the list or not
-  void _toggleSelectedMeal(Meal meal) {
-    final isExisting = _favoriteMeal.contains(meal);
+  // void _toggleSelectedMeal(Meal meal) {
+  //   final isExisting = _favoriteMeal.contains(meal);
 
-    if (isExisting) {
-      // using setState to update the ui when the meal is selected or deselected
-      setState(() {
-        _favoriteMeal.remove(meal);
-      });
-      _showInfoMessage('Meal removed from favorites');
-    } else {
-      setState(() {
-        _favoriteMeal.add(meal);
-      });
-      _showInfoMessage('Meal added to favorites');
-    }
-  }
+  //   if (isExisting) {
+  //     // using setState to update the ui when the meal is selected or deselected
+  //     setState(() {
+  //       _favoriteMeal.remove(meal);
+  //     });
+  //     _showInfoMessage('Meal removed from favorites');
+  //   } else {
+  //     setState(() {
+  //       _favoriteMeal.add(meal);
+  //     });
+  //     _showInfoMessage('Meal added to favorites');
+  //   }
+  // }
 
   void _selectPage(int index) {
     setState(() {
@@ -104,16 +105,17 @@ class _TabScreenState extends ConsumerState<TabScreen> {
     }).toList();
 
     Widget activePage = CategoriesScreen(
-      onToggleFavorite: _toggleSelectedMeal,
+      // onToggleFavorite: _toggleSelectedMeal,
       availableMeal: availableMeals,
     );
     var activePageTitle = 'Categories';
 
     if (_selectedPage == 1) {
+      final favoriteMeals = ref.watch(favoritesProvider);
       activePage = MealsScreen(
         meals:
-            _favoriteMeal, //allowing the favorited meal to be seen on the favorites page
-        onToggleFavorite: _toggleSelectedMeal,
+            favoriteMeals, //allowing the favorited meal to be seen on the favorites page
+        // onToggleFavorite: _toggleSelectedMeal,
       );
       activePageTitle = 'Your Favorites';
     }
