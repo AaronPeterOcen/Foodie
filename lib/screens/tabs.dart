@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:foodie/data/dummy_data.dart';
 import 'package:foodie/models/meal.dart';
+import 'package:foodie/providers/meals_provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:foodie/screens/categories.dart';
 import 'package:foodie/screens/filters.dart';
 import 'package:foodie/screens/meals.dart';
@@ -13,14 +15,15 @@ const kInitialFilters = {
   Filter.vegetarian: false,
 };
 
-class TabScreen extends StatefulWidget {
+// Stateful widget will be replaced with the ConsumerStatefulWidget to use the flutter_riverpod package
+class TabScreen extends ConsumerStatefulWidget {
   const TabScreen({super.key});
 
   @override
-  State<TabScreen> createState() => _TabScreenState();
+  ConsumerState<TabScreen> createState() => _TabScreenState();
 }
 
-class _TabScreenState extends State<TabScreen> {
+class _TabScreenState extends ConsumerState<TabScreen> {
   int _selectedPage = 0;
 
   // initialize a final variable that will hold an empty list value
@@ -82,7 +85,9 @@ class _TabScreenState extends State<TabScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final availableMeals = dummyMeals.where((meal) {
+    // mealsProvider
+    final meals = ref.watch(mealsProvider);
+    final availableMeals = meals.where((meal) {
       if (_selectedFilters[Filter.glutenFree]! && !meal.isGlutenFree) {
         return false;
       }
