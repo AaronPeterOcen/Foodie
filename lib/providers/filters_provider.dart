@@ -19,6 +19,10 @@ class FiltersProvider extends StateNotifier<Map<Filter, bool>> {
           Filter.vegetarian: false,
         });
 
+  void setFilters(Map<Filter, bool> chosenFilters) {
+    state = chosenFilters;
+  }
+
   // Method to update the state of a specific filter.
   void setFilter(Filter filter, bool isActive) {
     // Update the state by creating a new map with the updated filter value.

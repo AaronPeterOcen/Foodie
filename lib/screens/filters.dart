@@ -4,33 +4,35 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // FiltersProvider
 
-class FiltersScreen extends ConsumerStatefulWidget {
+class FiltersScreen extends ConsumerWidget {
   const FiltersScreen({
     super.key,
-    required this.currentFilter,
+    // required this.currentFilter,
   });
 
-  final Map<Filter, bool> currentFilter;
+  // final Map<Filter, bool> currentFilter;
 
-  @override
-  ConsumerState<FiltersScreen> createState() => _FiltersScreenState();
-}
+//   @override
+//   ConsumerState<FiltersScreen> createState() => _FiltersScreenState();
+// }
 
-class _FiltersScreenState extends ConsumerState<FiltersScreen> {
-  var _isGlutenFree = false;
-  var _isLactoseFree = false;
-  var _isVegetarian = false;
-  var _isVegan = false;
+// class _FiltersScreenState extends ConsumerState<FiltersScreen> {
+//   var _isGlutenFree = false;
+//   var _isLactoseFree = false;
+//   var _isVegetarian = false;
+//   var _isVegan = false;
 
   @override
   void initState() {
     // changing the value of the selected filter item when the filter screen is selected to
     // show currently selected filter
     super.initState();
-    _isGlutenFree = widget.currentFilter[Filter.glutenFree]!;
-    _isLactoseFree = widget.currentFilter[Filter.lactoseFree]!;
-    _isVegan = widget.currentFilter[Filter.vegan]!;
-    _isVegetarian = widget.currentFilter[Filter.vegetarian]!;
+    // using read because the state is executed once only
+    var activeFilter = ref.read(filtersProvider);
+    _isGlutenFree = activeFilter[Filter.glutenFree]!;
+    _isLactoseFree = activeFilter[Filter.lactoseFree]!;
+    _isVegan = activeFilter[Filter.vegan]!;
+    _isVegetarian = activeFilter[Filter.vegetarian]!;
   }
 
   @override
@@ -60,16 +62,19 @@ class _FiltersScreenState extends ConsumerState<FiltersScreen> {
         //   });
         //   return false;
         //using PopScope to filter the items that will be selected by the filter choice
-        canPop: false,
+        canPop: true,
         // ignore: deprecated_member_use
         onPopInvokedWithResult: (bool didPop, result) {
-          if (didPop) return;
-          Navigator.of(context).pop({
+          // if (didPop) return;
+          ref.read(filtersProvider.notifier).setFilters({
             Filter.glutenFree: _isGlutenFree,
-            Filter.lactoseFree: _isGlutenFree,
+            Filter.lactoseFree: _isLactoseFree,
             Filter.vegan: _isVegan,
             Filter.vegetarian: _isVegetarian,
           });
+
+          // Navigator.of(context).pop({});
+          // return true
         },
         child: Column(
           children: [
