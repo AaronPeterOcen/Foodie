@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 // import 'package:foodie/data/dummy_data.dart';
-import 'package:foodie/models/meal.dart';
+// import 'package:foodie/models/meal.dart';d
 import 'package:foodie/providers/favorites_provider.dart';
 import 'package:foodie/providers/meals_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -31,15 +31,6 @@ class _TabScreenState extends ConsumerState<TabScreen> {
   // final List<Meal> _favoriteMeal = [];
   // ignore: unused_field
   Map<Filter, bool> _selectedFilters = kInitialFilters;
-
-  void _showInfoMessage(String message) {
-    ScaffoldMessenger.of(context).clearSnackBars();
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-      ),
-    );
-  }
 
   // function will handle addition of the selected meal to the list
   // based on whether the item is already in the list or not

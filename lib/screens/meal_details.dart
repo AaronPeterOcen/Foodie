@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:foodie/models/meal.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:foodie/providers/favorites_provider.dart';
 
 // Page that is going to display new items on the loaded screen
-class MealDetails extends StatelessWidget {
+class MealDetails extends ConsumerWidget {
   const MealDetails({
     super.key,
     required this.meal,
@@ -13,7 +15,7 @@ class MealDetails extends StatelessWidget {
   // final void Function(Meal meal) onToggleFavorite;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         title: Text(meal.title),
@@ -22,7 +24,19 @@ class MealDetails extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              onToggleFavorite(meal);
+              // Access the favoritesProvider's notifier to call its methods
+              final wasAdded = ref
+                  .read(favoritesProvider.notifier)
+                  // Call the toggleFavoritesMealState method with the meal object
+                  .toggleFavoritesMealState(meal);
+              ScaffoldMessenger.of(context).clearSnackBars();
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(wasAdded
+                      ? 'Meal has been added as a favorite'
+                      : 'Meal removed'),
+                ),
+              );
             },
             icon: const Icon(Icons.star_border_outlined),
           )

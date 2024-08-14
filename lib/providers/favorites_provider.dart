@@ -7,16 +7,18 @@ class FavoritesProviderNotifier extends StateNotifier<List<Meal>> {
   FavoritesProviderNotifier() : super([]);
 
   // This method toggles the favorite status of a given meal.
-  void toggleFavoritesMealState(Meal meal) {
+  bool toggleFavoritesMealState(Meal meal) {
     // Check if the meal is already in the list of favorites.
     final mealIsFavorite = state.contains(meal);
 
     if (mealIsFavorite) {
       // If the meal is already a favorite, remove it from the list.
       state = state.where((m) => m.id != meal.id).toList();
+      return false;
     } else {
       // If the meal is not a favorite, add it to the list.
       state = [...state, meal];
+      return true;
     }
   }
 }
