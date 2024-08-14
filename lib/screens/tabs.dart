@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 // import 'package:foodie/data/dummy_data.dart';
 // import 'package:foodie/models/meal.dart';d
 import 'package:foodie/providers/favorites_provider.dart';
+import 'package:foodie/providers/filters_provider.dart';
 import 'package:foodie/providers/meals_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:foodie/screens/categories.dart';
 import 'package:foodie/screens/filters.dart';
 import 'package:foodie/screens/meals.dart';
 import 'package:foodie/widgets/meal_drawer.dart';
+
+// FiltersProvider
 
 const kInitialFilters = {
   Filter.glutenFree: false,
