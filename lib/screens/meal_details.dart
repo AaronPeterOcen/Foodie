@@ -28,27 +28,36 @@ class MealDetails extends ConsumerWidget {
         // the function will be got from the tabs screen
         actions: [
           IconButton(
-            onPressed: () {
-              // Access the favoritesProvider's notifier to call its methods
-              final wasAdded = ref
-                  .read(favoritesProvider.notifier)
-                  // Call the toggleFavoritesMealState method with the meal object
-                  .toggleFavoritesMealState(meal);
-              ScaffoldMessenger.of(context).clearSnackBars();
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(wasAdded
-                      ? 'Meal has been added as a favorite'
-                      : 'Meal removed'),
+              onPressed: () {
+                // Access the favoritesProvider's notifier to call its methods
+                final wasAdded = ref
+                    .read(favoritesProvider.notifier)
+                    // Call the toggleFavoritesMealState method with the meal object
+                    .toggleFavoritesMealState(meal);
+                ScaffoldMessenger.of(context).clearSnackBars();
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(wasAdded
+                        ? 'Meal has been added as a favorite'
+                        : 'Meal removed'),
+                  ),
+                );
+              },
+              icon: AnimatedSwitcher(
+                //using animated switcher  to animate the icon
+                duration: const Duration(milliseconds: 250),
+                transitionBuilder: (child, animation) {
+                  return RotationTransition(
+                    turns: animation,
+                    child: child,
+                  );
+                },
+                child: Icon(
+                  isFavorite
+                      ? Icons.star_purple500_sharp
+                      : Icons.star_border_outlined,
                 ),
-              );
-            },
-            icon: Icon(
-              isFavorite
-                  ? Icons.star_purple500_sharp
-                  : Icons.star_border_outlined,
-            ),
-          )
+              ))
         ],
       ),
       body: SingleChildScrollView(
