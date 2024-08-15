@@ -19,6 +19,7 @@ class CategoriesScreen extends StatefulWidget {
   State<CategoriesScreen> createState() => _CategoriesScreenState();
 }
 
+// setting up the explicit animations controller
 class _CategoriesScreenState extends State<CategoriesScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
@@ -94,9 +95,14 @@ class _CategoriesScreenState extends State<CategoriesScreen>
               ),
           ],
         ),
-        builder: (context, child) => Padding(
-            padding:
-                EdgeInsets.only(top: 100 - _animationController.value * 100),
+        builder: (context, child) => SlideTransition(
+            position: Tween(
+              begin: const Offset(0, 0.3),
+              end: const Offset(0, 0),
+            ).animate(CurvedAnimation(
+                    parent: _animationController, curve: Curves.ease)
+                //  _animationController.drive(),
+                ),
             child: child));
   }
 }
