@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:foodie/models/meal.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:foodie/providers/favorites_provider.dart';
+// import 'package:foodie/providers/filters_provider.dart';
 
 // Page that is going to display new items on the loaded screen
 class MealDetails extends ConsumerWidget {
@@ -16,6 +17,10 @@ class MealDetails extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final favoriteMeals = ref.watch(favoritesProvider);
+
+    final isFavorite = favoriteMeals.contains(meal);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(meal.title),
@@ -38,7 +43,11 @@ class MealDetails extends ConsumerWidget {
                 ),
               );
             },
-            icon: const Icon(Icons.star_border_outlined),
+            icon: Icon(
+              isFavorite
+                  ? Icons.star_purple500_sharp
+                  : Icons.star_border_outlined,
+            ),
           )
         ],
       ),
