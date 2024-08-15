@@ -48,7 +48,7 @@ class MealDetails extends ConsumerWidget {
                 duration: const Duration(milliseconds: 250),
                 transitionBuilder: (child, animation) {
                   return RotationTransition(
-                    turns: animation,
+                    turns: Tween(begin: 0.4, end: 1.0).animate(animation),
                     child: child,
                   );
                 },
@@ -56,6 +56,7 @@ class MealDetails extends ConsumerWidget {
                   isFavorite
                       ? Icons.star_purple500_sharp
                       : Icons.star_border_outlined,
+                  key: ValueKey(isFavorite),
                 ),
               ))
         ],
